@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" href="style.css">
+    <title>Aurora Trade Terminal</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default,fetch,Promise,URL,URLSearchParams,Array.from,Object.assign,Array.prototype.includes,Array.prototype.find"></script>
+</head>
+<body>
+    <div class="bot-container">
+        <div class="hero-header">
+            <div>
+                <h1>Aurora Trade Terminal</h1>
+                <p class="subheading">A futuristic Deriv & TradingView dashboard for live trading insights.</p>
+            </div>
+            <div class="hero-badge">Live Pulse</div>
+        </div>
+        <div class="main-grid">
+            <div class="panel panel-sidebar">
+                    <div class="credentials-box">
+                    <h2>Deriv Access</h2>
+                    <input id="appIdInput" type="text" placeholder="Deriv App ID" />
+                    <input id="tokenInput" type="password" placeholder="Deriv API Token" />
+                    <button id="connectBtn" class="btn connect">Connect</button>
+                </div>
+                <div class="status-box">
+                    <p>Provider: <span id="providerName">Deriv</span></p>
+                    <p>Symbol: <span id="symbol">R_100</span></p>
+                    <p>Live Price: <span id="price">Loading...</span></p>
+                    <p>Connection: <span id="connection">Disconnected</span></p>
+                    <p>Auth: <span id="authStatus">Not authorized</span></p>
+                </div>
+                <div class="selectors">
+                    <select id="providerSelect">
+                        <option value="deriv">Deriv</option>
+                        <option value="tradingview">TradingView</option>
+                    </select>
+                    <input id="symbolInput" type="text" value="R_100" placeholder="e.g. R_100 or BTCUSDT" />
+                    <select id="timeframeSelect">
+                        <option value="1m">1m</option>
+                        <option value="5m" selected>5m</option>
+                        <option value="15m">15m</option>
+                        <option value="1h">1h</option>
+                        <option value="1d">1d</option>
+                    </select>
+                    <button id="subscribeBtn" class="btn">Subscribe</button>
+                </div>
+                <div class="controls">
+                    <div class="trade-settings">
+                        <input id="stakeInput" type="number" step="0.5" min="0.5" value="1" placeholder="Stake" />
+                        <label class="checkbox-label"><input id="autoTradeCheckbox" type="checkbox" checked /> Auto trade</label>
+                    </div>
+                    <button id="buyBtn" class="btn buy">Buy (Call)</button>
+                    <button id="sellBtn" class="btn sell">Sell (Put)</button>
+                    <button id="analyzeBtn" class="btn analyze">Analyze Pair</button>
+                </div>
+                <div class="api-box analysis-box">
+                    <h2>API Request Tester</h2>
+                    <input id="apiUrlInput" type="text" placeholder="Enter API URL" value="https://jsonplaceholder.typicode.com/posts/1" />
+                    <textarea id="apiBodyInput" placeholder='POST body JSON: {"title":"Hello","body":"World"}'></textarea>
+                    <div class="api-controls">
+                        <button id="apiGetBtn" class="btn">GET</button>
+                        <button id="apiPostBtn" class="btn analyze">POST</button>
+                    </div>
+                </div>
+                <div id="apiResponse" class="analysis-box"></div>
+                <div id="insightsResults" class="analysis-box"></div>
+                <div id="analysisResults" class="analysis-box"></div>
+                <div id="logs" class="logs"></div>
+            </div>
+            <div class="panel panel-chart">
+                <div class="chart-toolbar">
+                    <div class="chart-details">
+                        <div class="chart-title">Live Chart</div>
+                        <div id="chartProviderLabel" class="chart-subtitle">Live chart</div>
+                    </div>
+                    <div class="chart-tabs">
+                        <button type="button" class="chart-tab-btn active" data-target="deriv">Live Chart</button>
+                        <button type="button" class="chart-tab-btn" data-target="tv">TradingView</button>
+                    </div>
+                </div>
+                <div id="chartSwipe" class="chart-swipe">
+                    <div id="deriv-chart-container" class="chart-container"></div>
+                    <div id="tv-widget-container" class="tv-widget hidden"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/lightweight-charts@3.10.0/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://s3.tradingview.com/tv.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
